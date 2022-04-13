@@ -1,0 +1,38 @@
+const paletasService = require('../services/paletas.service');
+
+const homePaletaController = (req,res) =>{
+  res.send("home paletas");
+};
+
+const findPaletasController = (req, res) => {
+  const allPaletas = paletasService.findPaletasService();
+  res.send(allPaletas);
+};
+
+const findPaletaByIdController = (req, res) => {
+  const idParam = req.params.id;
+  const chosenPaleta = paletasService.findPaletaByIdService(idParam);
+  res.send(chosenPaleta);
+};
+
+const addPaletaController = (req,res) => {
+  let retorno;
+
+  if(req.body.id){
+    retorno = paletasService.addPaletaService(req.body);
+  }else{
+    res.send({erro: 'id é obrigatório'});
+  }
+  if(retorno == 'ok'){
+    res.send({message:'paleta cadastrada com sucesso'});
+  }else{
+    res.send('ops, houve um erro, paleta nao foi cadastrada');
+  }
+};
+
+module.exports = {
+  homePaletaController,
+  findPaletasController,
+  findPaletaByIdController,
+  addPaletaController,
+};
