@@ -15,6 +15,12 @@ const findPaletaByIdController = (req, res) => {
   res.send(chosenPaleta);
 };
 
+const findPaletaByValorController = (req, res) => {
+  const valorParam = req.params.valor;
+  const chosenPaletas = paletasService.findPaletaByValorService(valorParam);
+  res.send(chosenPaletas);
+};
+
 const addPaletaController = (req,res) => {
   let retorno;
 
@@ -46,6 +52,7 @@ module.exports = {
   homePaletaController,
   findPaletasController,
   findPaletaByIdController,
+  findPaletaByValorController,
   addPaletaController,
   updatePaletaController,
   deletePaletaController

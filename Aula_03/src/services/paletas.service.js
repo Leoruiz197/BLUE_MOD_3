@@ -33,6 +33,9 @@ const findPaletaByIdService = (id) => {
     return paletas.find((paleta) => paleta.id == id);
 };
 
+const findPaletaByValorService = (valor) => {
+    return paletas.filter((paleta) => paleta.preco <= valor);
+};
 const addPaletaService = (paleta) =>{
     paletas.push(paleta);
     return 'ok';
@@ -53,6 +56,7 @@ const deletePaletaService = (id) => {
 module.exports = {
     findPaletasService,
     findPaletaByIdService,
+    findPaletaByValorService,
     addPaletaService,
     updatePaletaService,
     deletePaletaService
