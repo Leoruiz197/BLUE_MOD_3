@@ -9,6 +9,8 @@ router.get('/find-paleta/:id', paletasController.findPaletaByIdController);
 
 router.post('/add',paletasController.addPaletaController);
 
-router.delete('/delete',);
+router.put('/update/:id', paletasController.updatePaletaController);
+
+router.delete('/delete/:id', paletasController.deletePaletaController);
 
 module.exports = router;

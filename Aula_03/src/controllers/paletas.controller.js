@@ -30,9 +30,23 @@ const addPaletaController = (req,res) => {
   }
 };
 
+const updatePaletaController = (req, res) => {
+  const idParam = +req.params.id;
+  const paletaEdit = req.body;
+  const updatedPaleta = paletasService.updatePaletaService(idParam, paletaEdit);
+  res.send(updatedPaleta);
+};
+
+const deletePaletaController = (req, res) => {
+  const idParam = req.params.id;
+  paletasService.deletePaletaService(idParam);
+  res.send({ message: 'Paleta deletada com sucesso!' });
+};
 module.exports = {
   homePaletaController,
   findPaletasController,
   findPaletaByIdController,
   addPaletaController,
+  updatePaletaController,
+  deletePaletaController
 };
