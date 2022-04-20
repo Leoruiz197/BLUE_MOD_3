@@ -40,21 +40,18 @@ const findPaletaByIdService = async (id) => {
 const findPaletaByValorService = (valor) => {
     return paletas.filter((paleta) => paleta.preco <= valor);
 };
-const addPaletaService = (paleta) =>{
-    paletas.push(paleta);
-    return paleta;
+const addPaletaService = async (newPaleta) =>{
+    const paletaCriada = await Paleta.create(newPaleta)
+    return paletaCriada;
 };
 
-const updatePaletaService = (id, paletaEdited) => {
-    paletaEdited['id'] = id;
-    const paletaIndex = paletas.findIndex((paleta) => paleta.id == id);
-    paletas[paletaIndex] = paletaEdited;
-    return paletaEdited;
+const updatePaletaService = async (id, paletaEdited) => {
+    const paletaAtualizada = await Paleta.findByIdAndUpdate(id, paletaEdited);
+    return [paletaAtualizada,paletaEdited];
 };
 
-const deletePaletaService = (id) => {
-    const paletaIndex = paletas.findIndex((paleta) => paleta.id == id);
-    return paletas.splice(paletaIndex, 1);
+const deletePaletaService = async (id) => {
+    return await Paleta.findByIdAndDelete(id);
 };
 
 module.exports = {

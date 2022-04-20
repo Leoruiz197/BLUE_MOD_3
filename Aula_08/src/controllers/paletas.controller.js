@@ -38,7 +38,7 @@ const findPaletaByValorController = (req, res) => {
 //   return nome.trim().toLowerCase();
 // }
 
-const addPaletaController = (req,res) => {
+const addPaletaController = async (req,res) => {
   const paleta = req.body;
 
   if (
@@ -52,33 +52,46 @@ const addPaletaController = (req,res) => {
       { message: 'Você não preencheu todos os dados para adicionar uma nova paleta ao cardápio!'}
     );
   }
-  const newPaleta = paletasService.addPaletaService(paleta);
+  const newPaleta = await paletasService.addPaletaService(paleta);
   res.send(newPaleta);
   // if(validaEntrada(req.body.sabor) == "banana"){
 
   // }
 };
 
-const updatePaletaController = (req, res) => {
-  const idParam = +req.params.id;
+const updatePaletaController = async (req, res) => {
+  const idParam = req.params.id;
   const paletaEdit = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {
+    res.status(400).send({ message: 'ID inválido!' });
+    return;
+  }
 
   if (!paletaEdit || !paletaEdit.sabor || !paletaEdit.descricao || !paletaEdit.foto || !paletaEdit.preco) {
     return res.status(400).send({ message: "Você não preencheu todos os dados para editar a paleta!" });
   }
 
-  const chosenPaleta = paletasService.findPaletaByIdService(idParam);
+  const chosenPaleta = await paletasService.findPaletaByIdService(idParam);
 
   if (!chosenPaleta) {
     return res.status(404).send({ message: "Paleta não encontrada para editar!" })
   }
 
-  const updatedPaleta = paletasService.updatePaletaService(idParam, paletaEdit);
+  const updatedPaleta = await paletasService.updatePaletaService(
+    idParam,
+    paletaEdit,
+  );
   res.send(updatedPaleta);
 };
 
-const deletePaletaController = (req, res) => {
+const deletePaletaController = async (req, res) => {
   const idParam = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {
+    res.status(400).send({ message: 'ID inválido!' });
+    return;
+  }
 
   const chosenPaleta = paletasService.findPaletaByIdService(idParam);
 
@@ -86,7 +99,7 @@ const deletePaletaController = (req, res) => {
     return res.status(404).send({ message: "Paleta não encontrada para deletar!" })
   }
 
-  paletasService.deletePaletaService(idParam);
+  await paletasService.deletePaletaService(idParam);
   res.send({ message: 'Paleta deletada com sucesso!' });
 };
 module.exports = {

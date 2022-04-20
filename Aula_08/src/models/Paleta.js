@@ -7,6 +7,6 @@ const PaletaSchema = new mongoose.Schema({
     preco: { type: Number, required: true },
 });
 
-const Paleta = mongooose.model('paletas', PaletaSchema);
+const Paleta = mongoose.model('paletas', PaletaSchema);
 
 module.exports = Paleta;
