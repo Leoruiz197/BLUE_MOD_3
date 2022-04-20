@@ -1,0 +1,9 @@
+{
+    "_id": {
+      "$oid": "625df6b64a5f5c013fdd3daf"
+    },
+    "sabor": "Açaí com Leite Condensado",
+    "descricao":"Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+    "foto": "./assets/images/acai-com-leite-condensado.png",
+    "preco": 10.0  
+}
