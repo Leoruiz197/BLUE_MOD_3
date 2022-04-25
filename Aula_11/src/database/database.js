@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function connectToDatabase() {
-    mongoose.connect('mongodb://localhost:27017/paletas-db', {
+    mongoose.connect('mongodb+srv://admin:BLUE2021@api-elgeladon.69rvf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(() => {
