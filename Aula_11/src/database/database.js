@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function connectToDatabase() {
-    mongoose.connect('mongodb+srv://admin:BLUE2021@api-elgeladon.69rvf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    mongoose.connect(process.env.URI_DATABASE, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(() => {
