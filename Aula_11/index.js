@@ -6,11 +6,9 @@ const app = express();
 const paletas = require('./src/routes/paletas.routes');
 const connectToDatabase = require('./src/database/database');
 
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-}
-app.use(cors(corsOptions));
+
+app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 
 connectToDatabase();
