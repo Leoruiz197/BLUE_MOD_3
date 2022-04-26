@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/paletas",
+      "url": "https://localhost:3000/paletas",
       "description": "API de teste"
     },
     {
